@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        class Counter {
+
+            set Num(x) {
+                if (x % 1 == 0) {
+                    this.num = x;
+                }
+                else {
+                    alert("dfjhdjfhjdv")
+                }
+            }
+            get Num() {
+                return this.num;
+            }
+            Initialize(x) {
+                this.Num = x;
+            }
+            Increment() {
+                this.num++;
+            }
+            Go() {
+                var str = "";
+                for (var i = 0; i <= this.num; i++) {
+                    str += i + ", ";
+                }
+                return str;
+            }
+        }
+        function f1() {
+            number = document.getElementById("txt").value;
+            c1 = new Counter;
+            c1.Initialize(number);
+            console.log(c1.num);
+        }
+        function f2() {
+            c1.Increment()
+            document.getElementById("txt").value = c1.Num;
+        }
+        function Go() {
+            document.getElementById("ph").innerHTML = c1.Go();
+            c1.Go();
+        }
+    </script>
+</head>
+<body>
+    enter number
+    <input type="text" id="txt" />
+    <input type="button" value="Start" onclick="f1()" />
+    <input type="button" value="+" onclick="f2()" />
+    <input type="button" value="Go" onclick="Go()" />
+    <p id="ph"></p>
+</body>
+</html>

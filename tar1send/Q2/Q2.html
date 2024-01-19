@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        class Duck {
+            constructor(name, color, age, weight, pic) {
+                this.name = name;
+                this.color = color;
+                this.age = age;
+                this.weight = weight;
+                this.pic = pic;//הפיק הולך להיות סטרינג של תמונה
+            }
+            Show() {
+                var str = "";
+                str += "Name: " + this.name + ", ";
+                str += "Color: " + this.color + ", ";
+                str += "Age: " + this.age + ", ";
+                str += "Weight: " + this.weight + ", ";
+                return str; // לשנות שאולי יישלח לפלייסהולדר ונוסיף אליו את התמונה
+            }
+            Quack() {
+                var count = (this.weight * this.age) / 2;
+                var str1 = "";
+                for (var i = 0; i < count; i++) {
+                    str1 += "Quack ";
+                }
+                playTRexRoar();
+                return str1;
+            }
+        }
+        function playSound(audio, numberOfTimes = 3, delay = 1500, firstTime = true) {
+            if (firstTime) {
+                audio.play();
+            }
+            setTimeout(() => {
+                if (!firstTime) {
+                    audio.play();
+                }
+                numberOfTimes--;
+                if (numberOfTimes > 0) {
+                    playSound(audio, numberOfTimes, delay, false);
+                }
+            }, delay)
+        }
+
+        function playTRexRoar() {
+            var audio = new Audio('Quack.mp3');
+            playSound(audio, 6, 1500);
+        }
+        function f1() { // יצירת אובייקט
+            var name = document.getElementById("name").value;
+            var color = document.getElementById("color").value;
+            var age = document.getElementById("age").value;
+            var weight = document.getElementById("weight").value;
+            var pic = document.getElementById("pic").value;
+            d1 = new Duck(name, color, age, weight, pic);
+            document.getElementById("send_button").disabled = true;
+            var str = "<input type='button' value='Show' onclick='f2()' id='show_button' />";
+            str += "<input type='button' value='Quack' onclick='f3()' id='sound_quack' />";
+            document.getElementById("ph").innerHTML = str;
+            console.log(str);
+        }
+
+        function f2() {
+            var str = ""
+            str += "<input type='button' value='Show' onclick='f2()' id='show_button' />" + "<input type='button' value='Quack' onclick='f3()' id='sound_quack' />" +"<br />";
+            str += d1.Show();
+            str += "</p>";
+            str += "<br />";
+            let please = d1.pic;
+            console.log(please);
+            str += `<picture><img src="${please}" alt="nothing"></picture>`;
+            document.getElementById("ph").innerHTML = str;
+        }
+        function f3() {
+            var str = "<input type='button' value='Show' onclick='f2()' id='show_button' />" + "<input type='button' value='Quack' onclick='f3()' id='sound_quack' />" + "<br />";
+            str += d1.Quack();
+            console.log(str);
+            document.getElementById("ph").innerHTML = str;
+        }
+    </script>
+</head>
+<body>
+
+    Enter Name
+    <input type="text" id="name" />
+    <br />
+    Enter Color
+    <input type="text" id="color" />
+    <br />
+    Enter Age
+    <input type="text" id="age" />
+    <br />
+    Enter Weight
+    <input type="text" id="weight" />
+    <br />
+    Enter Pic
+    <input type="text" id="pic" />
+    <br />
+    <input type="button" value="send" onclick="f1()" id="send_button" /> <!--יצירת האובייקט-->
+    <br />
+    <div id="ph">
+    </div>
+</body>
+</html>

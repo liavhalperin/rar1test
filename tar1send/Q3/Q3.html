@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        class Clock {
+            constructor(name, hour, minute, second) {
+                this.name = name;
+                this.hour = hour;
+                this.minute = minute;
+                this.second = second;
+            }
+            ConvertToSeconds() {
+                
+                return this.hour * 3600 + this.minute * 60 + this.second*1;
+            }
+            Show() {
+                var newhour = "";
+                var newmin = "";
+                var newsec = "";
+                if (this.hour < 10) {
+                    newhour = '0' + this.hour;
+                }
+                else {
+                    newhour=this.hour
+                }
+                if (this.minute < 10) {
+                    newmin = '0' + this.minute;
+                }
+                else {
+                    newmin = this.minute;
+                }
+                if (this.second < 10) {
+                    newsec = '0' + this.second;
+                }
+                else {
+                    newsec = this.second;
+                }
+                return `${newhour}:${newmin}:${newsec}`;
+            }
+        }
+
+        arr = [];
+        function f1() {
+            var Fname = document.getElementById("name").value;
+            var Fhour = document.getElementById("hour").value;
+            var Fminute = document.getElementById("minute").value;
+            var Fsecond = document.getElementById("second").value;
+            arr.push(new Clock(Fname, Fhour, Fminute, Fsecond));
+            var str2 = "";
+            if (arr.length == 5) {
+                document.getElementById("btn").disabled = true;
+                for (var i = 0; i < arr.length; i++) {
+                    str2 += `${arr[i].name}: ${arr[i].Show()} ${arr[i].ConvertToSeconds()}` + "<br />";
+                }
+                document.getElementById("ph").innerHTML = str2;
+            }
+        }
+    </script>
+</head>
+<body>
+    Country Name
+    <br />
+    <input type="text" id="name" />
+    <br />
+    Hour
+    <br />
+    <input type="text" id="hour" />
+    <br />
+    Minute
+    <br />
+    <input type="text" id="minute" />
+    <br />
+    Second
+    <br />
+    <input type="text" id="second" />
+    <br />
+    <input type="button" onclick="f1()" id="btn" value="submit"/>
+    <br />
+    <div id="ph">
+
+    </div>
+</body>
+</html>
